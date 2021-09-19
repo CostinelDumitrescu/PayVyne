@@ -1,0 +1,35 @@
+server:
+  port: 9090
+  error:
+    whitelabel:
+      enabled: false
+
+spring:
+  webflux:
+    base-path: /api
+
+  # Datasource Configurations
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+  # R2DBC Configuration
+  r2dbc:
+    url: r2dbc:h2:mem:///trdb
+    username: user
+    password:
+    initialization-mode: always
+
+# Spring boot actuator configurations  - /api/actuator/health
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics
+
+auth:
+  users:
+    - username: "user"
+      password: "{noop}user"
+      roles: "USER"
